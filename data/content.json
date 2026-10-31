@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "mangas": [
+    {
+      "id": "days",
+      "title": "Sakamoto Days",
+      "slug": "days",
+      "native_title": "SAKAMOTO DAYS",
+      "country": "JP",
+      "language": "ja",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "updated_at": "2026-10-31T00:00:00.000Z"
+    }
+  ]
+}
