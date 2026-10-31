@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
- <url><loc>https://mangaatlasjpraw.github.io/sakamotodaysjp/</loc></url>
- <url><loc>https://mangaatlasjpraw.github.io/sakamotodaysjp/manga.html?slug=days</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://mangaatlasjpraw.github.io/sakamotodaysjp/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <image:image><image:loc>https://mangaatlasjpraw.github.io/sakamotodaysjp/manga-covers/days/1793478200118-_______.jpg</image:loc><image:title>days manga cover</image:title></image:image>
+  </url>
+  <url><loc>https://mangaatlasjpraw.github.io/sakamotodaysjp/manga.html?slug=days</loc></url>
 </urlset>
