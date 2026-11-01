@@ -1,13 +1,18 @@
-/* JPMangaatlas Ads System — loads every enabled configured section without a section-count cap. */
+/* JPMangaatlas Ads System — identical shared loader for every MangaAtlas site. */
+var mangaAtlasAdsScriptUrl = document.currentScript && document.currentScript.src;
 (async function () {
   'use strict';
   if (window.__mangaAtlasAdsSystemLoaded) return;
   window.__mangaAtlasAdsSystemLoaded = true;
-  if (location.pathname.indexOf('/admin') === 0) return;
+  if (/(^|\/)admin(?:\/|$)/i.test(location.pathname)) return;
 
   var cfg;
   try {
-    var response = await fetch('/sakamotodaysjp/data/ads-config.json?v=' + Date.now(), { cache: 'no-store' });
+    var configUrl = mangaAtlasAdsScriptUrl
+      ? new URL('data/ads-config.json', mangaAtlasAdsScriptUrl).href
+      : new URL('data/ads-config.json', document.baseURI).href;
+    configUrl += (configUrl.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now();
+    var response = await fetch(configUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error('Ads configuration HTTP ' + response.status);
     cfg = await response.json();
   } catch (error) {
