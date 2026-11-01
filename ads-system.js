@@ -84,7 +84,7 @@
               }
               invoke.onload = finish;
               invoke.onerror = finish;
-              var fallback = setTimeout(finish, 5000);
+              var fallback = setTimeout(finish, 1500);
               var done = finish;
               invoke.onload = function () { clearTimeout(fallback); done(); };
               invoke.onerror = function () { clearTimeout(fallback); done(); };
@@ -130,16 +130,71 @@
 
     if (placement === 'between') {
       var pages = document.querySelector('.pages') || document.querySelector('.reader');
-      if (!pages) return false;
-      var images = Array.prototype.slice.call(pages.querySelectorAll('img.page'));
       var number = parseInt(section.afterImage != null ? section.afterImage : section.between, 10);
       if (!Number.isFinite(number) || number < 1) number = 5;
-      // If a chapter has fewer images than the configured target, place the ad
-      // after the last available page instead of silently dropping this section.
-      if (!images.length) return false;
-      number = Math.min(number, images.length);
       box = executeIsolated(section.code, id);
-      images[number - 1].parentNode.insertBefore(box, images[number - 1].nextSibling);
+
+      // Homepage: use the chapter list as placement anchors instead of silently
+      // skipping "between" sections when there is no reader/image container.
+      if (!pages) {
+        var homeList = document.querySelector('.home-list');
+        var homeItems = homeList ? Array.prototype.slice.call(homeList.querySelectorAll(':scope > a')) : [];
+        if (homeList && homeItems.length) {
+          var homeIndex = Math.min(number, homeItems.length) - 1;
+          while (homeIndex < homeItems.length - 1 &&
+            homeItems[homeIndex].nextElementSibling &&
+            homeItems[homeIndex].nextElementSibling.classList.contains('manga-atlas-ad-slot')) {
+            homeIndex++;
+          }
+          homeItems[homeIndex].parentNode.insertBefore(box, homeItems[homeIndex].nextSibling);
+          activateScripts(box);
+          return true;
+        }
+        if (target && target !== document.body) {
+          target.appendChild(box);
+          activateScripts(box);
+          return true;
+        }
+        return false;
+      }
+
+      var images = Array.prototype.slice.call(pages.querySelectorAll('img.page'));
+      if (!images.length) return false;
+      if (images.length > 1) {
+        var imageIndex = Math.min(number, images.length) - 1;
+        while (imageIndex < images.length - 1 &&
+          images[imageIndex].nextElementSibling &&
+          images[imageIndex].nextElementSibling.classList.contains('manga-atlas-ad-slot')) {
+          imageIndex++;
+        }
+        images[imageIndex].parentNode.insertBefore(box, images[imageIndex].nextSibling);
+      } else {
+        // One-image chapters need distinct anchors: intro, before/after image,
+        // and related-content boundary, rather than stacking every slot.
+        var reader = document.querySelector('.reader') || pages;
+        var copy = reader.querySelector('.chapter-copy');
+        var related = reader.querySelector('.related');
+        var existingSlots = Array.prototype.filter.call(
+          reader.querySelectorAll('.manga-atlas-ad-slot'),
+          function (slot) {
+            var configured = sections.find(function (item) {
+              return String(item.id || '') === String(slot.dataset.maAdSection || '');
+            });
+            return configured && String(configured.placement || '').toLowerCase() === 'between';
+          }
+        ).length;
+        if (existingSlots === 0 && copy && copy.parentNode) {
+          copy.parentNode.insertBefore(box, copy.nextSibling);
+        } else if (existingSlots === 1 && images[0].parentNode) {
+          images[0].parentNode.insertBefore(box, images[0]);
+        } else if (existingSlots === 2 && images[0].parentNode) {
+          images[0].parentNode.insertBefore(box, images[0].nextSibling);
+        } else if (existingSlots === 3 && related && related.parentNode) {
+          related.parentNode.insertBefore(box, related);
+        } else {
+          reader.appendChild(box);
+        }
+      }
       activateScripts(box);
       return true;
     }
