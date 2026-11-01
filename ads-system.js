@@ -75,7 +75,7 @@ var mangaAtlasAdsScriptUrl = document.currentScript && document.currentScript.sr
   }
   function queueActivation(box) {
     activationQueue.push(box);
-    if (activationTimer === null) flushActivationQueue();
+    if (activationTimer === null) activationTimer = setTimeout(flushActivationQueue, 0);
   }
 
   function activateScripts(box) {
