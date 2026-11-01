@@ -81,7 +81,7 @@
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(MEASUREMENT_ID);
     document.head.appendChild(script);
     window.gtag('js', new Date());
-    window.gtag('config', MEASUREMENT_ID, { send_page_view: false });
+    window.gtag('config', MEASUREMENT_ID, { send_page_view: false, user_properties: { site_name: SITE_NAME, site_id: SITE_ID } });
 
     if (/\/chapter\.html$/i.test(location.pathname)) {
       var observer = new MutationObserver(function () {
