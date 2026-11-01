@@ -11,7 +11,8 @@
     var slug = '';
     try { slug = new URLSearchParams(location.search).get('slug') || ''; } catch (e) {}
     var titleNode = document.getElementById('title');
-    var chapterName = String((titleNode && titleNode.textContent) || document.title || '').trim();
+    var nodeTitle = String((titleNode && titleNode.textContent) || '').trim();
+    var chapterName = nodeTitle && nodeTitle !== 'Chapter' ? nodeTitle : String(document.title || SITE_NAME).trim();
     var match = chapterName.match(/(?:chapter|ch\.?|第)\s*([0-9]+(?:\.[0-9]+)?)/i);
     return {
       chapter_name: chapterName,
