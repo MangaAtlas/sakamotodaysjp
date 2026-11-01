@@ -60,6 +60,24 @@ var mangaAtlasAdsScriptUrl = document.currentScript && document.currentScript.sr
     return script;
   }
 
+  // Activate no more than 10 configured ad placements per one-second batch.
+  // The first batch starts immediately; later placements continue in subsequent seconds.
+  var activationQueue = [];
+  var activationTimer = null;
+  function flushActivationQueue() {
+    activationTimer = null;
+    var batch = activationQueue.splice(0, 10);
+    batch.forEach(function (box) {
+      try { activateScripts(box); }
+      catch (error) { console.warn('Could not activate ad placement.', error); }
+    });
+    if (activationQueue.length) activationTimer = setTimeout(flushActivationQueue, 1000);
+  }
+  function queueActivation(box) {
+    activationQueue.push(box);
+    if (activationTimer === null) flushActivationQueue();
+  }
+
   function activateScripts(box) {
     var scripts = Array.prototype.slice.call(box.querySelectorAll('script'));
     for (var i = 0; i < scripts.length; i++) {
@@ -152,12 +170,12 @@ var mangaAtlasAdsScriptUrl = document.currentScript && document.currentScript.sr
             homeIndex++;
           }
           homeItems[homeIndex].parentNode.insertBefore(box, homeItems[homeIndex].nextSibling);
-          activateScripts(box);
+          queueActivation(box);
           return true;
         }
         if (target && target !== document.body) {
           target.appendChild(box);
-          activateScripts(box);
+          queueActivation(box);
           return true;
         }
         return false;
@@ -200,7 +218,7 @@ var mangaAtlasAdsScriptUrl = document.currentScript && document.currentScript.sr
           reader.appendChild(box);
         }
       }
-      activateScripts(box);
+      queueActivation(box);
       return true;
     }
 
@@ -222,7 +240,7 @@ var mangaAtlasAdsScriptUrl = document.currentScript && document.currentScript.sr
     } else {
       target.parentNode.insertBefore(box, target);
     }
-    activateScripts(box);
+    queueActivation(box);
     return true;
   }
 
