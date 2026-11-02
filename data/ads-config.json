@@ -1,21 +1,21 @@
 {
-  "version": 2,
+  "version": 3,
   "sections": [
     {
-      "id": "ad-1",
-      "name": "Social Bar Ads",
+      "id": "ad-social-bar",
+      "name": "Social Bar — single load",
       "enabled": true,
-      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/910085a44f873ee57a7c5593512e3062\"></script>\n<div id=\"container-910085a44f873ee57a7c5593512e3062\"></div>\n<script data-cfasync=\"false\" src=\"https://bauval.org/14/a4580bfa45525c6ee6e3aba38b61c2c6\"></script>\n<script>\n  atOptions = {\n    'key' : '108cd54d1212cb8e826c188d93dcbef3',\n    'format' : 'iframe',\n    'height' : 50,\n    'width' : 320,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/108cd54d1212cb8e826c188d93dcbef3\"></script>\n<script>\n  atOptions = {\n    'key' : '44e8752b0105fb66aac675306e52d4e5',\n    'format' : 'iframe',\n    'height' : 60,\n    'width' : 468,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/44e8752b0105fb66aac675306e52d4e5\"></script>\n<script>\n  atOptions = {\n    'key' : '79d4c4013245c69c5c9c79d5e7b99452',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/79d4c4013245c69c5c9c79d5e7b99452\"></script>\n<script>\n  atOptions = {\n    'key' : '035af2182e44cab392cb5288b7f3525c',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/035af2182e44cab392cb5288b7f3525c\"></script>",
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/910085a44f873ee57a7c5593512e3062\"></script>",
       "placement": "start",
-      "between": "2"
+      "between": "50"
     },
     {
-      "id": "ad-2",
-      "name": "Ad Section 2",
-      "enabled": false,
-      "code": "",
-      "placement": "end",
-      "between": "1"
+      "id": "ad-new-formats",
+      "name": "New ad formats",
+      "enabled": true,
+      "code": "<div id=\"container-910085a44f873ee57a7c5593512e3062\"></div>\n<script data-cfasync=\"false\" src=\"https://bauval.org/14/a4580bfa45525c6ee6e3aba38b61c2c6\"></script>\n<script>\n  atOptions = {\n    'key' : '108cd54d1212cb8e826c188d93dcbef3',\n    'format' : 'iframe',\n    'height' : 50,\n    'width' : 320,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/108cd54d1212cb8e826c188d93dcbef3\"></script>\n<script>\n  atOptions = {\n    'key' : '44e8752b0105fb66aac675306e52d4e5',\n    'format' : 'iframe',\n    'height' : 60,\n    'width' : 468,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/44e8752b0105fb66aac675306e52d4e5\"></script>\n<script>\n  atOptions = {\n    'key' : '79d4c4013245c69c5c9c79d5e7b99452',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/79d4c4013245c69c5c9c79d5e7b99452\"></script>\n<script>\n  atOptions = {\n    'key' : '035af2182e44cab392cb5288b7f3525c',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/035af2182e44cab392cb5288b7f3525c\"></script>",
+      "placement": "start",
+      "between": "50"
     },
     {
       "id": "ad-3",
