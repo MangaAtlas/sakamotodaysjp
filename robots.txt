@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /sakamotodaysjp/admin/
 
-Sitemap: https://mangaatlasjpraw.github.io/sakamotodaysjp/sitemap.xml
+Sitemap: https://mangaatlas.github.io/sakamotodaysjp/sitemap.xml
